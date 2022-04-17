@@ -16,7 +16,8 @@ services:
     restart: always
 
   postgresqldb:
-    image: postgres
+    build:
+      dockerfile: ./psql/sqlinit.Dockerfile
     container_name: postgresqldb
     ports:
       - "5432:5432"
