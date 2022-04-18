@@ -27,7 +27,7 @@ func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/", IndexHandler)
 	r.HandleFunc("/list-all-users", Listallusers)
-	r.HandleFunc("/search-an-user/{fullname}", Searchanuser).Methods(http.MethodPost, http.MethodOptions)
+	r.HandleFunc("/search-an-user", Searchanuser).Methods(http.MethodPost, http.MethodOptions)
 	r.HandleFunc("/get-user-detailed-information", Getuserdetailedinformation)
 	r.HandleFunc("/create-the-user", Createtheuser).Methods(http.MethodPost, http.MethodOptions)
 	http.ListenAndServe(":5000", r)
@@ -54,8 +54,16 @@ func Listallusers(w http.ResponseWriter, r *http.Request) {
 }
 
 func Searchanuser(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r) // 獲取引數
-	user, _ := sqlpublic.Searchanuser(vars["fullname"])
+	dec := json.NewDecoder(r.Body)
+	log.Println(dec)
+	dec.DisallowUnknownFields()
+	var user = Users.User{}
+	err := dec.Decode(&user)
+	if err != nil {
+		panic(err)
+	}
+
+	user, _ = sqlpublic.Searchanuser(user.Fullname)
 	usercount := user.Acct
 	json.NewEncoder(w).Encode(usercount)
 	fmt.Fprintf(w, "")
