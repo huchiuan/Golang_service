@@ -81,3 +81,20 @@ func Listallusers() ([]Users.User, error) {
 	}
 
 }
+
+func Searchanuser(fullname string) (Users.User, error) {
+	// var users Users.Users
+	var user Users.User
+
+	result := db.First(&user, "fullname = ?", fullname)
+	log.Debug(result)
+
+	if result.Error == nil {
+		log.Info("<SqlPublic>:查詢結果:", result)
+		return user, nil
+	} else {
+		log.Error("<SqlPublic>:查詢失敗")
+		return user, nil
+	}
+
+}

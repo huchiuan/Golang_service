@@ -24,6 +24,7 @@ func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/", IndexHandler)
 	r.HandleFunc("/listallusers", Listallusers)
+	r.HandleFunc("/searchanuser/{fullname}", Searchanuser).Methods(http.MethodPost, http.MethodOptions)
 	http.ListenAndServe(":5000", r)
 
 }
@@ -46,5 +47,12 @@ func Listallusers(w http.ResponseWriter, r *http.Request) {
 	// w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(usersnamelist)
 	// users, err := json.Marshal(users)
+	fmt.Fprintf(w, "")
+}
+
+func Searchanuser(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r) // 獲取引數
+	user, _ := sqlpublic.Searchanuser(vars["fullname"])
+	json.NewEncoder(w).Encode(user)
 	fmt.Fprintf(w, "")
 }
