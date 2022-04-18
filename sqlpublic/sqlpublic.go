@@ -98,3 +98,20 @@ func Searchanuser(fullname string) (Users.User, error) {
 	}
 
 }
+
+func Getuserdetailedinformation() ([]Users.User, error) {
+	// var users Users.Users
+	var user []Users.User
+
+	result := db.Find(&user)
+	log.Debug(result)
+
+	if result.Error == nil {
+		log.Info("<SqlPublic>:查詢結果:", result)
+		return user, nil
+	} else {
+		log.Error("<SqlPublic>:查詢失敗")
+		return user, nil
+	}
+
+}

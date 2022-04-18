@@ -23,8 +23,9 @@ func main() {
 	//restfulapi
 	r := mux.NewRouter()
 	r.HandleFunc("/", IndexHandler)
-	r.HandleFunc("/listallusers", Listallusers)
-	r.HandleFunc("/searchanuser/{fullname}", Searchanuser).Methods(http.MethodPost, http.MethodOptions)
+	r.HandleFunc("/list-all-users", Listallusers)
+	r.HandleFunc("/search-an-user/{fullname}", Searchanuser).Methods(http.MethodPost, http.MethodOptions)
+	r.HandleFunc("/get-user-detailed-information", Getuserdetailedinformation)
 	http.ListenAndServe(":5000", r)
 
 }
@@ -44,15 +45,23 @@ func Listallusers(w http.ResponseWriter, r *http.Request) {
 		log.Info(user.Acct)
 	}
 
-	// w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(usersnamelist)
-	// users, err := json.Marshal(users)
 	fmt.Fprintf(w, "")
 }
 
 func Searchanuser(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r) // 獲取引數
 	user, _ := sqlpublic.Searchanuser(vars["fullname"])
-	json.NewEncoder(w).Encode(user)
+	usercount := user.Acct
+	json.NewEncoder(w).Encode(usercount)
+	fmt.Fprintf(w, "")
+}
+
+func Getuserdetailedinformation(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	users, _ := sqlpublic.Getuserdetailedinformation()
+
+	json.NewEncoder(w).Encode(users)
 	fmt.Fprintf(w, "")
 }
