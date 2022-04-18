@@ -135,3 +135,20 @@ func Createtheuser(user Users.User) error {
 	}
 
 }
+
+func Getuserbyacct(acct string) (Users.User, error) {
+
+	var user Users.User
+
+	result := db.First(&user, "acct = ?", acct)
+	log.Debug(result)
+
+	if result.Error == nil {
+		log.Info("<SqlPublic>:查詢結果:", result)
+		return user, nil
+	} else {
+		log.Error("<SqlPublic>:查詢失敗")
+		return user, nil
+	}
+
+}
