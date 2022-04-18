@@ -2,40 +2,49 @@
 package main
 
 import (
-	"database/sql"
+	sqlpublic "UI_Assignment/sqlpublic"
 	"fmt"
-	"log"
 	"net/http"
 
+	"encoding/json"
+
+	"github.com/gorilla/mux"
 	_ "github.com/lib/pq"
+	log "github.com/sirupsen/logrus"
 )
 
-const (
-	// 指定要連接的DB位置
-	HOST     = "postgresqldb"
-	DATABASE = "ui_test"
-	USER     = "ui_test"
-	PASSWORD = "66556622"
-)
-
+func Init() {
+	sqlpublic.SqlInit()
+}
 func main() {
+	Init()
 	// 連接DB
-	db, err := sql.Open(
-		"postgres",
-		fmt.Sprintf("host=%s user=%s password=%s dbname=%s sslmode=disable", HOST, USER, PASSWORD, DATABASE),
-	)
-	if err != nil {
-		panic(err)
-	}
-	// 檢查連接是否成功
-	if err = db.Ping(); err != nil {
-		panic(err)
-	}
-	fmt.Println("Successfully created connection to database")
 
-	// 啟動一個簡單的http server
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hello World!!")
-	})
-	log.Fatal(http.ListenAndServe(":5000", nil))
+	//restfulapi
+	r := mux.NewRouter()
+	r.HandleFunc("/", IndexHandler)
+	r.HandleFunc("/listallusers", Listallusers)
+	http.ListenAndServe(":5000", r)
+
+}
+
+func IndexHandler(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+	fmt.Fprintf(w, "hello world")
+}
+
+func Listallusers(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	users, _ := sqlpublic.Listallusers()
+	var usersnamelist []string
+	for _, user := range users {
+		usersnamelist = append(usersnamelist, user.Acct)
+		log.Info(user.Acct)
+	}
+
+	// w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(usersnamelist)
+	// users, err := json.Marshal(users)
+	fmt.Fprintf(w, "")
 }
