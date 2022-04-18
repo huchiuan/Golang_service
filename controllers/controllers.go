@@ -144,7 +144,7 @@ var Signin = func(w http.ResponseWriter, r *http.Request) {
 }
 
 //commit 6: Create an API to delete the user.
-var Deleteuser = func(w http.ResponseWriter, r *http.Request) {
+var Deletetheuser = func(w http.ResponseWriter, r *http.Request) {
 	dec := json.NewDecoder(r.Body)
 	log.Println(dec)
 	dec.DisallowUnknownFields()
@@ -159,4 +159,22 @@ var Deleteuser = func(w http.ResponseWriter, r *http.Request) {
 	// usercount := user.Acct
 	// json.NewEncoder(w).Encode(usercount)
 	fmt.Fprintf(w, "刪除結束")
+}
+
+//commit 7: Create an API to update the user.
+var Updatetheuser = func(w http.ResponseWriter, r *http.Request) {
+	dec := json.NewDecoder(r.Body)
+	log.Println(dec)
+	dec.DisallowUnknownFields()
+	var user = Users.User{}
+	err := dec.Decode(&user)
+	if err != nil {
+		panic(err)
+	}
+
+	_ = sqlpublic.Updateuser(user.Acct, user.Pwd)
+	// //
+	// usercount := user.Acct
+	// json.NewEncoder(w).Encode(usercount)
+	fmt.Fprintf(w, "更新結束")
 }

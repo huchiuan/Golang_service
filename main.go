@@ -35,7 +35,9 @@ func main() {
 	r.HandleFunc("/get-user-detailed-information", controllers.Getuserdetailedinformation)
 	r.HandleFunc("/create-the-user", controllers.Createtheuser).Methods(http.MethodPost, http.MethodOptions)
 	r.HandleFunc("/sign-in", controllers.Signin).Methods(http.MethodPost, http.MethodOptions)
-	r.HandleFunc("/delete-user", controllers.Deleteuser).Methods(http.MethodPost, http.MethodOptions)
+	r.HandleFunc("/delete-the-user", controllers.Deletetheuser).Methods(http.MethodPost, http.MethodOptions)
+	r.HandleFunc("/update-the-user", controllers.Updatetheuser).Methods(http.MethodPost, http.MethodOptions)
+
 	http.ListenAndServe(":5000", r)
 
 }

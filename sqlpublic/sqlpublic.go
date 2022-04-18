@@ -2,6 +2,7 @@ package sqlbublic
 
 import (
 	"fmt"
+	"time"
 
 	"os"
 
@@ -165,6 +166,32 @@ func Deleteuserbyacct(acct string) error {
 		return nil
 	} else {
 		log.Error("<SqlPublic>:刪除失敗")
+		return nil
+	}
+
+}
+
+func Updateuser(acct, pwd string) error {
+
+	var user Users.User
+	user.Acct = acct
+	result := db.First(&user)
+	if result.Error == nil {
+
+		user.Pwd = pwd
+		user.Updated_at = time.Now()
+		result = db.Save(&user)
+
+		if result.Error == nil {
+			log.Info("<SqlPublic>:更新結束")
+			return nil
+		} else {
+			log.Error("<SqlPublic>:更新失敗")
+			return nil
+		}
+
+	} else {
+		log.Error("<SqlPublic>:更新失敗，查無此人")
 		return nil
 	}
 
