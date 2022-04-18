@@ -152,3 +152,20 @@ func Getuserbyacct(acct string) (Users.User, error) {
 	}
 
 }
+
+func Deleteuserbyacct(acct string) error {
+
+	var user Users.User
+	user.Acct = acct
+	result := db.Delete(&user)
+	log.Debug(result)
+
+	if result.Error == nil {
+		log.Info("<SqlPublic>:刪除成功")
+		return nil
+	} else {
+		log.Error("<SqlPublic>:刪除失敗")
+		return nil
+	}
+
+}

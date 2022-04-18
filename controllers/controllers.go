@@ -141,6 +141,22 @@ var Signin = func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
 		fmt.Fprintf(w, "密碼錯誤")
 	}
-	// json.NewEncoder(w).Encode(userpwd)
+}
 
+//commit 6: Create an API to delete the user.
+var Deleteuser = func(w http.ResponseWriter, r *http.Request) {
+	dec := json.NewDecoder(r.Body)
+	log.Println(dec)
+	dec.DisallowUnknownFields()
+	var user = Users.User{}
+	err := dec.Decode(&user)
+	if err != nil {
+		panic(err)
+	}
+
+	_ = sqlpublic.Deleteuserbyacct(user.Acct)
+	// //
+	// usercount := user.Acct
+	// json.NewEncoder(w).Encode(usercount)
+	fmt.Fprintf(w, "刪除結束")
 }
