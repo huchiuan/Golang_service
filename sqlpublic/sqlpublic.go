@@ -11,6 +11,7 @@ import (
 	log "github.com/sirupsen/logrus"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"gorm.io/gorm/clause"
 )
 
 var db *gorm.DB
@@ -112,6 +113,25 @@ func Getuserdetailedinformation() ([]Users.User, error) {
 	} else {
 		log.Error("<SqlPublic>:查詢失敗")
 		return user, nil
+	}
+
+}
+
+func Createtheuser(user Users.User) error {
+
+	result := db.Clauses(clause.OnConflict{
+		UpdateAll: true,
+	}).Table("users").Create(&user)
+
+	if result.Error == nil {
+		log.Info("<SqlPublic>:新增資料成功\n")
+
+		return nil
+	} else {
+
+		log.Error("<SqlPublic>:新增資料失敗\n")
+
+		return result.Error
 	}
 
 }
