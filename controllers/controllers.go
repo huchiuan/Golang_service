@@ -178,3 +178,21 @@ var Updatetheuser = func(w http.ResponseWriter, r *http.Request) {
 	// json.NewEncoder(w).Encode(usercount)
 	fmt.Fprintf(w, "更新結束")
 }
+
+//commit 9: Create an API to update user’s fullname.
+var Updatetheuserfullname = func(w http.ResponseWriter, r *http.Request) {
+	dec := json.NewDecoder(r.Body)
+	log.Println(dec)
+	dec.DisallowUnknownFields()
+	var user = Users.User{}
+	err := dec.Decode(&user)
+	if err != nil {
+		panic(err)
+	}
+
+	_ = sqlpublic.Updateuserfullname(user.Acct, user.Fullname)
+	// //
+	// usercount := user.Acct
+	// json.NewEncoder(w).Encode(usercount)
+	fmt.Fprintf(w, "更新結束")
+}

@@ -196,3 +196,29 @@ func Updateuser(acct, pwd string) error {
 	}
 
 }
+
+func Updateuserfullname(acct, fullname string) error {
+
+	var user Users.User
+	user.Acct = acct
+	result := db.First(&user)
+	if result.Error == nil {
+
+		user.Fullname = fullname
+		user.Updated_at = time.Now()
+		result = db.Save(&user)
+
+		if result.Error == nil {
+			log.Info("<SqlPublic>:更新結束")
+			return nil
+		} else {
+			log.Error("<SqlPublic>:更新失敗")
+			return nil
+		}
+
+	} else {
+		log.Error("<SqlPublic>:更新失敗，查無此人")
+		return nil
+	}
+
+}

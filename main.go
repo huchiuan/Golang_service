@@ -37,6 +37,7 @@ func main() {
 	r.HandleFunc("/sign-in", controllers.Signin).Methods(http.MethodPost, http.MethodOptions)
 	r.HandleFunc("/delete-the-user", controllers.Deletetheuser).Methods(http.MethodPost, http.MethodOptions)
 	r.HandleFunc("/update-the-user", controllers.Updatetheuser).Methods(http.MethodPost, http.MethodOptions)
+	r.HandleFunc("/update-the-user-fullname", controllers.Updatetheuserfullname).Methods(http.MethodPost, http.MethodOptions)
 
 	http.ListenAndServe(":5000", r)
 

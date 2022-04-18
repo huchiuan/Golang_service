@@ -15,7 +15,7 @@ const Key = "token"
 var JwtAuthentication = func(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
-		needAuthPaths := []string{"/list-all-users", "/get-user-detailed-information", "/search-an-user", "/delete-the-user", "/update-the-user"}
+		needAuthPaths := []string{"/list-all-users", "/get-user-detailed-information", "/search-an-user", "/delete-the-user", "/update-the-user", "/update-the-user-fullname"}
 		requestPath := r.URL.Path
 
 		var needAuth = false
