@@ -98,7 +98,7 @@ http://localhost:5000/update-the-user
 // API
 http://localhost:5000/update-the-user-fullname
 // JSON
-{"acct":"jason123","fullname":"6666666666666666666 }
+{"acct":"jason123","fullname":"6666666666666666666" }
 ```
 ### POSTMAN DEMO  (commit 9)
 ![image](https://upload.cc/i1/2022/04/19/zGlEek.png)
@@ -109,7 +109,7 @@ http://localhost:5000/update-the-user-fullname
 // API
 http://localhost:5000/delete-the-user
 // JSON
-{"acct":"jason123 }
+{"acct":"jason123" }
 ```
 ### POSTMAN DEMO  (commit 6)
 ![image](https://upload.cc/i1/2022/04/19/R6z8Po.png)
