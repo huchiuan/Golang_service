@@ -32,7 +32,7 @@ var Listallusers = func(w http.ResponseWriter, r *http.Request) {
 	}
 
 	json.NewEncoder(w).Encode(usersnamelist)
-	fmt.Fprintf(w, "sussess_token:")
+	fmt.Fprintf(w, "")
 }
 
 //commit 2: Create an API to search an user by fullname.
@@ -135,11 +135,11 @@ var Signin = func(w http.ResponseWriter, r *http.Request) {
 		})
 
 		w.WriteHeader(http.StatusOK)
-		fmt.Fprintf(w, "密碼正確")
+		fmt.Fprintf(w, "登入成功")
 
 	} else {
 		w.WriteHeader(http.StatusOK)
-		fmt.Fprintf(w, "密碼錯誤")
+		fmt.Fprintf(w, "登入失敗")
 	}
 }
 

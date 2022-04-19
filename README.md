@@ -35,21 +35,102 @@ make RUN
 
 # API 介紹 :
 
-##  HTTP GET
-+ 
+##  由於 TOKEN 使用於 COOKIE 中，建議使用 POSTMAN　測試。
+<br></br>
+
+##  常用資料介紹 :
++ acct : 使用者帳號
++ pwd : 使用者密碼
++ fullname : 使用者名稱
+
+<br></br>
+
+#  HTTP POST :
+## 建立一個使用者  (commit 4)
 
 ```zsh
-
-//Create功能
-curl -X POST -k http://localhost:8090/Create -d '{"table": "kkbox","key":"edison","data":"ma"}'
-
-//Get功能
-curl -X POST -k http://localhost:8090/Get -d '{"table": "kkbox","key":"edison","data":"ma"}'
-
-//Update功能
-curl -X POST -k http://localhost:8090/Update -d '{"table": "kkbox","key":"edison","data":"ma"}'
-
-//Delete功能
-curl -X POST -k http://localhost:8090/Delete -d '{"table": "kkbox","key":"edison"}'
-
+// API
+http://localhost:5000/create-the-user
+// JSON
+{"acct":"jason123","pwd":"0000","fullname":"jason"} 
 ```
+### POSTMAN DEMO (commit 4)
+![image](https://upload.cc/i1/2022/04/19/04miPR.png)
+<br></br>
+
+## 登入使用者  (commit 5)
+
+```zsh
+// API
+http://localhost:5000/sign-in
+// JSON
+{"acct":"jason123","pwd":"0000" }
+```
+### POSTMAN DEMO (commit 5)
+![image](https://upload.cc/i1/2022/04/19/1TEKFZ.png)
+<br></br>
+
+## 使用 fullname 搜尋使用者  (commit 2)
+```zsh
+// API
+http://localhost:5000/search-an-user
+// JSON
+{"fullname":"jason"}
+```
+### POSTMAN DEMO  (commit 2)
+![image](https://upload.cc/i1/2022/04/19/cD6RFa.png)
+<br></br>
+
+
+## 變更使用者密碼 (commit 7)
+```zsh
+// API
+http://localhost:5000/update-the-user
+// JSON
+{"acct":"jason123","pwd":"66666" }
+```
+### POSTMAN DEMO  (commit 7)
+![image](https://upload.cc/i1/2022/04/19/gCi2OF.png)
+<br></br>
+
+## 變更使用者名稱 (commit 9)
+```zsh
+// API
+http://localhost:5000/update-the-user-fullname
+// JSON
+{"acct":"jason123","fullname":"6666666666666666666 }
+```
+### POSTMAN DEMO  (commit 9)
+![image](https://upload.cc/i1/2022/04/19/zGlEek.png)
+<br></br>
+
+## 刪除使用者 (commit 6)
+```zsh
+// API
+http://localhost:5000/delete-the-user
+// JSON
+{"acct":"jason123 }
+```
+### POSTMAN DEMO  (commit 6)
+![image](https://upload.cc/i1/2022/04/19/R6z8Po.png)
+<br></br>
+
+
+#  HTTP GET :
+## 列出所有使用者帳號 (commit 1)
+```zsh
+// API
+http://localhost:5000/list-all-users
+```
+### POSTMAN DEMO  (commit 1)
+![image](https://upload.cc/i1/2022/04/19/7QZwDW.png)
+<br></br>
+
+## 列出所有使用者詳細資料 (commit 3)
+```zsh
+// API
+http://localhost:5000/get-user-detailed-information
+```
+### POSTMAN DEMO  (commit 3)
+![image](https://upload.cc/i1/2022/04/19/cHpqP2.png)
+<br></br>
