@@ -3,22 +3,24 @@ version: "3.5"
 services:
   server:
     build:
-      # context: .
+      context: ./docker
       dockerfile: Dockerfile
+    container_name: Golang_service
     working_dir: /server
     volumes:
       - .:/server
     ports:
       - "5000:5000"
     depends_on:
-      - db
+      - postgresqldb
     entrypoint: go run main.go
     restart: always
 
   postgresqldb:
     build:
-      dockerfile: ./psql/sqlinit.Dockerfile
-    container_name: postgresqldb
+      context: ./psql
+      dockerfile: sqlinit.Dockerfile
+    container_name: DB_service
     ports:
       - "5432:5432"
     environment:

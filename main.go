@@ -20,6 +20,7 @@ import (
 func Init() {
 	sqlpublic.SqlInit()
 }
+
 func main() {
 	Init()
 	// 連接DB
