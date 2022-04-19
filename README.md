@@ -13,8 +13,8 @@
 <br></br>
 
 # 使用之前：
-## 在使用之前必須使用 makefile 運行啟動指令。
-+ 使用 Docker 運行 Golang Server 與 PostgreSQ，於 local 建立兩個服務的 Container。
+## 在使用之前必須開啟 Docker，並使用 makefile 運行啟動指令。
++ makefile 會使用 Docker 運行 Golang Server 與 PostgreSQL，於 local 建立兩個服務的 Container。
 
 <br></br>
 ## 請在終端機輸入 :
