@@ -1,4 +1,3 @@
-// main.go
 package main
 
 import (
@@ -7,14 +6,8 @@ import (
 	sqlpublic "UI_Assignment/sqlpublic"
 	"net/http"
 
-	// "encoding/json"
-
-	// Users "UI_Assignment/model"
-	// "time"
-
 	"github.com/gorilla/mux"
 	_ "github.com/lib/pq"
-	// log "github.com/sirupsen/logrus"
 )
 
 func Init() {
@@ -23,9 +16,7 @@ func Init() {
 
 func main() {
 	Init()
-	// 連接DB
 
-	//restfulapi
 	r := mux.NewRouter()
 
 	// 註冊jwt認證的中介軟體

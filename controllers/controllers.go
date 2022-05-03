@@ -87,11 +87,6 @@ var Createtheuser = func(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "")
 }
 
-// type Claims struct {
-// 	Acct string `json:"acct"`
-// 	jwt.StandardClaims
-// }
-
 //commit 5: Create an API to generate the token to the user (user sign in).
 var Signin = func(w http.ResponseWriter, r *http.Request) {
 
@@ -155,9 +150,7 @@ var Deletetheuser = func(w http.ResponseWriter, r *http.Request) {
 	}
 
 	_ = sqlpublic.Deleteuserbyacct(user.Acct)
-	// //
-	// usercount := user.Acct
-	// json.NewEncoder(w).Encode(usercount)
+
 	fmt.Fprintf(w, "刪除結束")
 }
 
@@ -173,9 +166,7 @@ var Updatetheuser = func(w http.ResponseWriter, r *http.Request) {
 	}
 
 	_ = sqlpublic.Updateuser(user.Acct, user.Pwd)
-	// //
-	// usercount := user.Acct
-	// json.NewEncoder(w).Encode(usercount)
+
 	fmt.Fprintf(w, "更新結束")
 }
 
@@ -191,8 +182,6 @@ var Updatetheuserfullname = func(w http.ResponseWriter, r *http.Request) {
 	}
 
 	_ = sqlpublic.Updateuserfullname(user.Acct, user.Fullname)
-	// //
-	// usercount := user.Acct
-	// json.NewEncoder(w).Encode(usercount)
+
 	fmt.Fprintf(w, "更新結束")
 }

@@ -29,10 +29,4 @@ services:
       - PGDATA=/var/lib/postgresql/data/pgdata
     restart: always
 
-  # pgadmin:
-  #   container_name: pgadmin
-  #   image: thajeztah/pgadmin4
-  #   ports:
-  #     - "5050:5050"
-  #   restart: always
 
